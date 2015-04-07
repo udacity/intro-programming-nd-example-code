@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="title">Additional Resources</h2>
+
+<div class="row">
+{% for t in topics %}
+	<div class="table-of-contents-entry">
+		<a class="item-title" href="#topic-{{ loop.index }}">{{ t.title }}</a>
+	</div>
+{% endfor %}
+</div>
+
+{% for t in topics %}
+<div class="row">
+	<div class="col-12 section-title">
+		<h2 id="topic-{{ loop.index }}">{{ t.title }}</h2>
+	</div>
+</div>
+<div class="row section">
+	<p>{{ t.description }}</p>
+	<ul>
+	{% for r in t.resources %}
+		<li>
+			<a class="item-title" href="{{ r.url }}" target="_blank">
+				{{ r.title }}
+			</a>
+			<p>{{ r.description }}</p>
+		</li>
+	{% endfor %}
+	</ul>
+</div>
+{% endfor %}
+{% endblock %}

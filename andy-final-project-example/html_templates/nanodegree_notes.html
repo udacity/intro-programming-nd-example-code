@@ -1,0 +1,74 @@
+<!-- This is the HTML template for the  -->
+
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="title">Andy's Notes</h1>
+
+<div class="row">
+
+{% for c in courses %}
+
+	<div class="table-of-contents-entry">
+		<a class="item-title" href="#course-{{ loop.index }}">
+			Course {{ loop.index }}: {{ c.title }}
+		</a>
+	</div>
+{% endfor %}
+</div>
+
+{% for course in courses %}
+
+<div class="row">
+	<div id="course-{{ loop.index}}" class="col-12 section-title">
+		<h2>Course {{ loop.index }}: {{ course.title }}</h2>
+	</div>
+</div>
+
+<div class="section">
+	<div class="row">
+	<p>{{ course.description }}</p>
+
+	<div class="course-info">
+		<ol>
+		{% set course_number = loop.index %}
+		{% for lesson in course.lessons %}
+
+			<li>
+				<a class="item-title" href="course/{{ course_number }}/#lesson-{{ loop.index }}">
+					Lesson {{ loop.index }} - {{ lesson.title }}
+				</a>
+				<p>{{ lesson.description }}</p>
+			</li>
+
+		{% endfor %}
+
+		</ol>
+
+		<h3>More Resources</h3>
+
+		<ul>
+			<li>
+				<a href="course/{{ loop.index }}/">Notes for {{ course.title }}</a>
+			</li>
+			<li>
+				<a class="external" href="{{ course.url }}" target="_blank">Link to Udacity Course</a>
+			</li>
+		</ul>
+	</div>
+
+	<div class="video">
+		<h3>Best Video: {{ course.favorite_video.title }}</h3>
+		<div class="embedded-video">
+			<iframe width="100%" src="{{ course.favorite_video.url }}" frameborder="0" allowfullscreen></iframe>
+		</div>
+		<div class="caption">
+			{{ course.favorite_video.caption }}
+		</div>
+	</div>
+	</div>
+</div>
+
+{% endfor %}
+
+{% endblock %}

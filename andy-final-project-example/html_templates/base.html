@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+
+	<head>
+		<title>
+			Andy Brown's IPND Notes
+		</title>
+		<style>
+			/* TODO : default page_name to home */
+			#{{ page_name }}-link {
+				color: rgba(255,255,255,1.0);
+			}
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="icon" type="image/png" href="/images/favicon.ico">
+		<link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+		<link rel="stylesheet" href="/stylesheets/structure.css">
+		<link rel="stylesheet" href="/stylesheets/skin.css">
+	</head>
+
+	<body>
+		<div class="row header">
+			{% if page_name == "home" %}
+			<div class="col-12 banner">
+				<img class="top-image" src="/images/andy.png">
+				<h1 class="page-title">Andy Brown's IPND Notes</h1>
+			</div>
+			{% endif %}
+			<div class="col-12 nav nav-top">
+				<ul class="nav-list">
+					<li class="nav-item nav-item-left"><a id="home-link" href="/">Home</a></li>
+					{% for s in sections %}
+					<li class="nav-item nav-item-right"><a href="/{{ s.href }}" id="{{ s.id }}-link">{{ s.short_title }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+
+		</div>
+		{% block content %}
+		{% endblock %}
+		<div class="row footer">
+			<h1 class="take-nanodegree">Want to learn to code?</h1>
+			<form class="take-nanodegree" action="https://www.udacity.com/course/nd000">
+				<button class="button button-primary">Take the Nanodegree!</button>
+			</form>
+		</div>
+	</body>
+
+</html>
+{% endautoescape %}
