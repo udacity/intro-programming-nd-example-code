@@ -5,58 +5,36 @@
 
 <h1 class="title">Andy's Notes</h1>
 
-<div class="row">
-
-{% for c in courses %}
-
+<div class="section">
+{% for course in courses %}
 	<div class="table-of-contents-entry">
 		<a class="item-title" href="#course-{{ loop.index }}">
-			Course {{ loop.index }}: {{ c.title }}
+			Course {{ loop.index }}: {{ course.title }}
 		</a>
 	</div>
-{% endfor %}
+	{% endfor %}
 </div>
 
 {% for course in courses %}
-
-<div class="row">
-	<div id="course-{{ loop.index}}" class="col-12 section-title">
-		<h2>Course {{ loop.index }}: {{ course.title }}</h2>
-	</div>
-</div>
-
 <div class="section">
-	<div class="row">
+	<h2 class="section-title" id="course-{{ loop.index}}">
+		Course {{ loop.index }}: {{ course.title }}
+	</h2>
 	<p>{{ course.description }}</p>
-
 	<div class="course-info">
-		<ol>
-		{% set course_number = loop.index %}
-		{% for lesson in course.lessons %}
-
-			<li>
+	<ol>
+	{% set course_number = loop.index %}
+	{% for lesson in course.lessons %}
+		<li>
+			<h3>
 				<a class="item-title" href="course/{{ course_number }}/#lesson-{{ loop.index }}">
 					Lesson {{ loop.index }} - {{ lesson.title }}
 				</a>
-				<p>{{ lesson.description }}</p>
-			</li>
-
-		{% endfor %}
-
-		</ol>
-
-		<h3>More Resources</h3>
-
-		<ul>
-			<li>
-				<a href="course/{{ loop.index }}/">Notes for {{ course.title }}</a>
-			</li>
-			<li>
-				<a class="external" href="{{ course.url }}" target="_blank">Link to Udacity Course</a>
-			</li>
-		</ul>
-	</div>
-
+			</h3>
+			<p>{{ lesson.description }}</p>
+		</li>
+	{% endfor %}
+	</ol>
 	<div class="video">
 		<h3>Best Video: {{ course.favorite_video.title }}</h3>
 		<div class="embedded-video">
@@ -66,9 +44,17 @@
 			{{ course.favorite_video.caption }}
 		</div>
 	</div>
+	<h3>More Resources</h3>
+	<ul>
+		<li>
+			<a href="course/{{ loop.index }}/">Notes for {{ course.title }}</a>
+		</li>
+		<li>
+			<a class="external" href="{{ course.url }}" target="_blank">Link to Udacity Course</a>
+		</li>
+	</ul>
+	</div>
 	</div>
 </div>
-
 {% endfor %}
-
 {% endblock %}

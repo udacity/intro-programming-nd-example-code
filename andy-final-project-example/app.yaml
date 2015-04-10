@@ -3,7 +3,7 @@
 # Its primary role is to tell App Engine how to actually build
 # the web app you will make.
 application: learn-2-code
-version: 4
+version: 7
 runtime: python27
 api_version: 1
 threadsafe: true

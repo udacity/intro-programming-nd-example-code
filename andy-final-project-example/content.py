@@ -461,6 +461,23 @@ TOPICS = [
 		}
 	]
 	},
+	{"title" : "Accessibility",
+	"description" : ("At its core, the internet is about connecting people. Practice accessible design to ensure that all users of your site have the best experience."),
+	"resources" : [
+		{
+		"title" : "The alt Attribute",
+		"url" : "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-alt",
+		"description" : ('Blind people use the web too! And when they do, they often use "screen readers" '
+			'which read the text of your page to them. When your visual content (like <img> or <video> elements) '
+			"has an alt tag these screen readers will read the descriptive text that you've added.")
+		},
+		{
+		"title" : "Accessibility Best Practices",
+		"url" : "http://accessibility.arl.org/standards-best-practices/#technical-standards",
+		"description" : ('A list of 12 easy-to-implement accessibile design guidelines.')
+		}
+	]
+	},
 	{"title" : "Python Resources",
 	"description" : ("Get more Python practice and read more about important Python "
 		"concepts."),
@@ -574,25 +591,29 @@ SECTIONS = [
 	 "image_url" : "/images/computer_notes.jpg",
 	 "href"      : "nanodegree_notes/",
 	 "short_title":"Notes",
-	 "id"        : "notes"
+	 "id"        : "notes",
+	 "alt"       : "open laptop next to a paper notebook"
 	},
 	{"title"     : "Student Notes",
 	 "image_url" : "/images/colored_papers.jpg",
 	 "href"      : "student_submissions/",
 	 "short_title":"Projects",
-	 "id"        : "submissions"
+	 "id"        : "submissions",
+	 "alt"			 : "stack of brightly colored folders seen from above"
 	},
 	{"title"     : "More Resources",
 	 "image_url" : "/images/tools.jpg",
 	 "href"      : "additional_resources/",
 	 "short_title":"Resources",
-	 "id"        : "resources"
+	 "id"        : "resources",
+	 "alt"			 : "various carpentry tools neatly arranged on white background"
 	},
 	{"title"     : "Codepen Examples",
 	 "image_url" : "/images/pen.jpg",
 	 "href"      : "code_pen_examples/",
 	 "short_title":"Codepens",
-	 "id"        : "codepen"
+	 "id"        : "codepen",
+	 "alt"			 : "closeup of fountain pen on paper"
 	}]
 
 def get_application_id(url):

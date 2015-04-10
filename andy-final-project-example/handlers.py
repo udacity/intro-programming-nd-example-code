@@ -46,6 +46,10 @@ class ResourcesHandler(Handler):
 	def get(self):
 		self.render('additional_resources.html', topics=TOPICS, page_name="resources")
 
+class CodePenExampleListHandler(Handler):
+	def get(self, error=False):
+		self.render('code_pen_examples.html', examples=CODE_PENS, page_name="codepen")
+
 class SubmissionListHandler(Handler):
 	def get(self):
 		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
@@ -55,22 +59,95 @@ class SubmissionListHandler(Handler):
 		self.render('guestbook.html', submissions=submissions, page_name="submissions")
 
 class SubmissionHandler(Handler):
-	def get(self):
-		self.render('add_submission.html', page_name="submissions" )
+	def get(self, **kwargs):
+		print
+		print
+		print
+		print kwargs
+		print
+		print
+		print
+		print
+		print
+		self.render('add_submission.html', page_name="submissions", **kwargs)
 	def post(self):
+
 		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
 		submission = Submission(parent=guestbook_key(guestbook_name))
 		submission.name = self.request.get('name')
 		submission.link = self.request.get('link')
 		submission.description = self.request.get('description')
 		submission.image_url = self.request.get('image_url')
-		submission.put()
-		# query_params = {'guestbook_name' : guestbook_name}
-		self.redirect('/student_submissions/') # + urllib.urlencode(query_params))
 
-class CodePenExampleListHandler(Handler):
-	def get(self, error=False):
-		self.render('code_pen_examples.html', examples=CODE_PENS, page_name="codepen")
+		query_params = {"guestbook_name" : guestbook_name,
+										"name": submission.name,
+										"link":submission.link,
+										"description":submission.link,
+										"image_url":submission.image_url,
+										"secret_key" : self.request.get("secret_key") }
+
+		is_valid, errors = validate_submission(submission, self.request.get('secret_key'))
+		if is_valid:
+			submission.put()
+			self.redirect('/student_submissions/')
+		else:
+			for k, v in errors.items():
+				query_params[k] = v
+			self.get(**query_params)
 
 
+def is_appspot_url(url):
+	return (url.find(".appspot.com") > 5)
+
+def validate_submission(submission, secret_key):
+	valid = True
+	errors = {}
+	if not is_appspot_url(submission.link):
+		errors['link_error'] = "Your URL is not a valid appspot.com URL."
+		valid = False
+	if len(submission.name) < 2:
+		errors['name_error'] = "Please enter a name to display."
+		valid = False
+	if len(submission.description) < 10:
+		errors['description_error'] = "Please enter a description for your project (at least 10 characters)"
+		valid = False
+	appspot_id = get_appspot_id(submission.link)
+	correct_key = generate_secret_key(appspot_id)
+	if secret_key != correct_key:
+		errors['secret_key_error'] = "That key is incorrect. Your Project reviewer should have included a 6-character key in your final project review."
+		valid=False
+	return valid, errors
+
+def get_appspot_id(url):
+	from urlparse import urlparse
+	parsed = urlparse("http://learn-2-code.appspot.com/student_submissions/add?")
+	return parsed.netloc.split('.')[0]
+
+def generate_secret_key(appspot_id):
+    import hashlib
+
+    def is_valid_appspot_id(appspot_id):
+        """Helper function to help identify invalid IDs"""
+        num_chars = len(appspot_id)
+        if num_chars < 6 or num_chars > 30:
+            print "appspot ids are between 6 and 30 characters"
+            return False
+        valid_chars = "abcdefghijklmnopqrstuvwxyz0123456789-"
+        for char in appspot_id:
+            if char not in valid_chars:
+                print "appspot ids do not allow: %s" % char
+                return False
+        return True
+
+    # Check for valid appspot_id
+    if not is_valid_appspot_id(appspot_id):
+        print "Invalid appspot ID"
+        return None
+
+    # appspot_id looks good. Generate key...
+    hashed_id = hashlib.sha224(appspot_id).hexdigest()
+    secret_key = hashed_id[0:6] # simplicity > security
+
+    print "Secret key is: %s" % secret_key
+    return secret_key
 

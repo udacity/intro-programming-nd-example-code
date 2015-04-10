@@ -15,7 +15,7 @@
 <div class="row">
 {% for sub in submissions %}
 	{% if sub.image_url %}
-	<div class="panel" style="background-image: url({{ sub.image_url }})">
+	<div class="panel" style="background-image: url({{ sub.image_url }})" alt="">
 	{% else %}
 	<div class="panel">
 	{% endif %}

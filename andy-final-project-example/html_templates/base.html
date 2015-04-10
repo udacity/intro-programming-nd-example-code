@@ -1,48 +1,44 @@
 <!DOCTYPE html>
 {% autoescape true %}
 <html>
-
+	<!-- Everything in the <head> element is extra information for the browser -->
 	<head>
-		<title>
-			Andy Brown's IPND Notes
-		</title>
+		<title>Andy Brown's IPND Notes</title>
 		<style>
-			/* TODO : default page_name to home */
-			#{{ page_name }}-link {
-				color: rgba(255,255,255,1.0);
-			}
+			/* COURSE 1 - This little bit of CSS is weird. The page_name between
+			the braces is what's called a "variable" and you'll learn more about
+			those in course 2. */
+			#{{ page_name }}-link {color: rgba(255,255,255,1.0);}
 		</style>
+		<!-- COURSE 5 - This <meta> tag does something called "setting the viewport".
+		It's this line of code that makes my page show up nicely on mobile devices.-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 		<link rel="icon" type="image/png" href="/images/favicon.ico">
 		<link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
-		<link rel="stylesheet" href="/stylesheets/structure.css">
 		<link rel="stylesheet" href="/stylesheets/skin.css">
 	</head>
 
 	<body>
 		<div class="row header">
 			{% if page_name == "home" %}
-			<div class="col-12 banner">
-				<img class="top-image" src="/images/andy.png">
-				<h1 class="page-title">Andy Brown's IPND Notes</h1>
+			<div class="section">
+				<img class="top-image" src="/images/andy.png" alt="photo of Andy">
+				<h1>Andy Brown's IPND Notes</h1>
 			</div>
 			{% endif %}
-			<div class="col-12 nav nav-top">
-				<ul class="nav-list">
-					<li class="nav-item nav-item-left"><a id="home-link" href="/">Home</a></li>
-					{% for s in sections %}
-					<li class="nav-item nav-item-right"><a href="/{{ s.href }}" id="{{ s.id }}-link">{{ s.short_title }}</a></li>
-					{% endfor %}
-				</ul>
-			</div>
+			<ul class="nav-list">
+				<li class="nav-item nav-item-left"><a id="home-link" href="/">Home</a></li>
+				{% for s in sections %}
+				<li class="nav-item nav-item-right"><a href="/{{ s.href }}" id="{{ s.id }}-link">{{ s.short_title }}</a></li>
+				{% endfor %}
+			</ul>
 
 		</div>
 		{% block content %}
 		{% endblock %}
 		<div class="row footer">
-			<h1 class="take-nanodegree">Want to learn to code?</h1>
-			<form class="take-nanodegree" action="https://www.udacity.com/course/nd000">
+			<h1>Want to learn to code?</h1>
+			<form action="https://www.udacity.com/course/nd000">
 				<button class="button button-primary">Take the Nanodegree!</button>
 			</form>
 		</div>
