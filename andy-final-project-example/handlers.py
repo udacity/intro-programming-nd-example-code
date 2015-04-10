@@ -60,18 +60,9 @@ class SubmissionListHandler(Handler):
 
 class SubmissionHandler(Handler):
 	def get(self, **kwargs):
-		print
-		print
-		print
-		print kwargs
-		print
-		print
-		print
-		print
-		print
 		self.render('add_submission.html', page_name="submissions", **kwargs)
-	def post(self):
 
+	def post(self):
 		guestbook_name = self.request.get('guestbook_name', DEFAULT_GUESTBOOK_NAME)
 		submission = Submission(parent=guestbook_key(guestbook_name))
 		submission.name = self.request.get('name')
@@ -94,7 +85,6 @@ class SubmissionHandler(Handler):
 			for k, v in errors.items():
 				query_params[k] = v
 			self.get(**query_params)
-
 
 def is_appspot_url(url):
 	return (url.find(".appspot.com") > 5)

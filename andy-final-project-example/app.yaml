@@ -11,10 +11,8 @@ threadsafe: true
 handlers:
 - url: /stylesheets
   static_dir: stylesheets
-  #application_readable: true
 - url: /images
   static_dir: images
-  #application_readable: true
 - url: /templates
   static_dir: html_templates
   application_readable: true
