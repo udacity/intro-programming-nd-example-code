@@ -120,11 +120,27 @@ COURSES = [
 			"url" : "https://www.udacity.com/course/viewer#!/c-ud552-nd/l-3574398630",
 			"concepts"  : [
 					{ "title"				: "==, !=, >, <, >=, <=",
-						"description" : "These are all Python 'comparison operators'. They return the 'boolean' True when they are correct and False when they aren't. For example, 5 != 6 would return True, since 5 is not equal to 6."},
+						"description" : 'These are all Python "comparison operators". They return the "boolean" True when they are correct and False when they are not. For example, 5 != 6 would return True, since 5 is not equal to 6.'},
 					{ "title"				: "if, then, else",
 						"description" : "These three Python keywords let us tell Python what code we want it to execute in different situations."},
 					{ "title"				: "while loops",
 						"description" : "A while loop will repeat the indented block of code beneath it as long as the condition on the first line (right after 'while') is true."
+					}
+				]
+			},
+			{
+			"title"			: "How to Solve Problems",
+			"description"   : ("The first step in solving large problems is to understand the problem. We do this by "
+				"1) understanding the inputs. 2) understanding the outputs. And 3) writing a function to correctly produce the desired output from the input."),
+			"url" : "https://www.udacity.com/course/viewer#!/c-ud552-nd/l-3486769621/m-108325372",
+			"concepts"  : [
+					{ "title"				: "Understanding Inputs",
+						"description" : ("This requires figuring out what inputs your function will be responsible for processing "
+						"In the example problem, the inputs were 6 numbers which are used to encode two dates. We also assumed "
+						"that the second date would always be after the first.")},
+					{ "title"				: "Understanding Outputs",
+						"description" : ("This requires figuring out exactly what output your function is responsible for providing. "
+						"In the example problem, the output was a single number which represented the number of days between two dates.")
 					}
 				]
 			}
