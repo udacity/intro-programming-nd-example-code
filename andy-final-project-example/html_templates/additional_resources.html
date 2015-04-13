@@ -16,10 +16,10 @@
 	<h2 class="section-title" id="topic-{{ loop.index }}">{{ topic.title }}</h2>
 	<p>{{ topic.description }}</p>
 	<ul>
-	{% for resource in topic.resources %}
+	{% for r in topic.resources %}
 		<li>
-			<h3><a class="item-title" href="{{ resource.url }}" target="_blank">{{ resource.title }}</a></h3>
-			<p>{{ resource.description }}</p>
+			<h3><a class="item-title" href="{{ r.url }}" target="_blank">{{ r.title }}</a></h3>
+			<p>{{ r.description }}</p>
 		</li>
 	{% endfor %}
 	</ul>

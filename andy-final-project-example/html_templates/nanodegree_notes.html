@@ -1,5 +1,3 @@
-<!-- This is the HTML template for the  -->
-
 {% extends "base.html" %}
 {% block content %}
 
@@ -21,7 +19,6 @@
 		Course {{ loop.index }}: {{ course.title }}
 	</h2>
 	<p>{{ course.description }}</p>
-	<div class="course-info">
 	<ol>
 	{% set course_number = loop.index %}
 	{% for lesson in course.lessons %}
@@ -40,21 +37,13 @@
 		<div class="embedded-video">
 			<iframe width="100%" src="{{ course.favorite_video.url }}" frameborder="0" allowfullscreen></iframe>
 		</div>
-		<div class="caption">
-			{{ course.favorite_video.caption }}
-		</div>
+		<div class="caption">{{ course.favorite_video.caption }}</div>
 	</div>
 	<h3>More Resources</h3>
 	<ul>
-		<li>
-			<a href="course/{{ loop.index }}/">Notes for {{ course.title }}</a>
-		</li>
-		<li>
-			<a class="external" href="{{ course.url }}" target="_blank">Link to Udacity Course</a>
-		</li>
+		<li><a href="course/{{ loop.index }}/">Notes for {{ course.title }}</a></li>
+		<li><a href="{{ course.url }}" target="_blank">Link to Course</a></li>
 	</ul>
-	</div>
-	</div>
 </div>
 {% endfor %}
 {% endblock %}
