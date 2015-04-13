@@ -4,25 +4,26 @@
 <h1 class="title">Additional Resources</h2>
 
 <div class="section">
-	{% for t in topics %}
+	{% for topic in topics %}
 	<div class="table-of-contents-entry">
-		<a class="item-title" href="#topic-{{ loop.index }}">{{ t.title }}</a>
+		<a class="item-title" href="#topic-{{ loop.index }}">{{ topic.title }}</a>
 	</div>
 	{% endfor %}
 </div>
 
-{% for t in topics %}
+{% for topic in topics %}
 <div class="section">
-	<h2 class="section-title" id="topic-{{ loop.index }}">{{ t.title }}</h2>
-	<p>{{ t.description }}</p>
+	<h2 class="section-title" id="topic-{{ loop.index }}">{{ topic.title }}</h2>
+	<p>{{ topic.description }}</p>
 	<ul>
-	{% for r in t.resources %}
+	{% for resource in topic.resources %}
 		<li>
-			<h3><a class="item-title" href="{{ r.url }}" target="_blank">{{ r.title }}</a></h3>
-			<p>{{ r.description }}</p>
+			<h3><a class="item-title" href="{{ resource.url }}" target="_blank">{{ resource.title }}</a></h3>
+			<p>{{ resource.description }}</p>
 		</li>
 	{% endfor %}
 	</ul>
 </div>
+
 {% endfor %}
 {% endblock %}
