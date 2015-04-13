@@ -80,7 +80,7 @@ COURSES = [
 		"lessons" : [
 			{
 			"title"     : "Introduction to Serious Programming",
-			"description"  : "Big Problems can be broken into smaller pieces.",
+			"description"  : "Answers questions like: What's a program? What's a computer? What's a programming language?",
 			"url" : "https://www.udacity.com/course/viewer#!/c-ud552-nd/l-3527838955",
 			"concepts" : [
 					{	"title" 			: "Computer",
