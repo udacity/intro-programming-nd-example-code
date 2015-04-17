@@ -87,7 +87,10 @@ class SubmissionHandler(Handler):
 			self.get(**query_params)
 
 def is_appspot_url(url):
-	return (url.find(".appspot.com") > 5)
+	if url.find(".appspot.com") > 5:
+		return True
+	else:
+		return False
 
 def validate_submission(submission, secret_key):
 	valid = True
